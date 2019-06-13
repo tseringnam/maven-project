@@ -5,8 +5,7 @@ pipeline {
       jdk 'jdk'
 
     }
-    stages{
-        stage('Build'){
+    stage('Build'){
             steps {
                 sh 'mvn clean package'
             }
@@ -17,5 +16,9 @@ pipeline {
                 }
             }
         }
-  }
-}
+        stage ('Deploy to Staging'){
+            steps {
+                build job: 'Deploy-to-staging'
+            }
+        }
+    }
